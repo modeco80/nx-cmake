@@ -5,7 +5,7 @@ Usage:
 
 ```bash
 . <where you cloned>/setenv.sh
-cd <insert CMake project here>
+cd <insert CMake project here (TIP: Try building one of the sample projects in the repository)>
 mkdir build
 cd build
 nxcmake ..
