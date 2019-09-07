@@ -45,6 +45,7 @@ function(__add_nacp target APP_TITLE APP_AUTHOR APP_VERSION)
                         COMMAND ${__NACP_COMMAND}
                         WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
                         VERBATIM
+						COMMENT "Making NACP ${target}"
     )
 endfunction()
 
@@ -92,12 +93,14 @@ function(add_nro_target target)
                             COMMAND ${ELF2NRO} $<TARGET_FILE:${target}> ${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nro --nacp=${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nacp
                             DEPENDS ${target} ${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nacp
                             VERBATIM
+							COMMENT "Converting ${target} to ${target}.nro"
         )
 		else()
 		     add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nro
                             COMMAND ${ELF2NRO} $<TARGET_FILE:${target}> ${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nro --icon=${APP_ICON} --nacp=${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nacp
                             DEPENDS ${target} ${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nacp
                             VERBATIM
+							COMMENT "Converting ${target} to ${target}.nro"
 			)
 		endif()
     else()
@@ -106,6 +109,7 @@ function(add_nro_target target)
                             COMMAND ${ELF2NRO} $<TARGET_FILE:${target}> ${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nro
                             DEPENDS ${target}
                             VERBATIM
+							COMMENT "Converting ${target} to ${target}.nro"
         )
     endif()
     add_custom_target(${target_we}_nro ALL SOURCES ${CMAKE_CURRENT_BINARY_DIR}/${target_we}.nro)
