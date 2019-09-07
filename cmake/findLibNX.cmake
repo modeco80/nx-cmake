@@ -16,7 +16,6 @@ if(NOT DEVKITPRO)
 	msys_to_cmake("$ENV{DEVKITPRO}" DEVKITPRO)
 endif()
 
-
 set(LIBNX_PATHS ${DEVKITPRO}/libnx)
 
 find_path(LIBNX_INCLUDE_DIR switch.h
@@ -38,13 +37,11 @@ find_package_handle_standard_args(LIBNX DEFAULT_MSG
 mark_as_advanced(LIBNX_INCLUDE_DIR LIBNX_LIBRARY)
 
 if(LIBNX_FOUND)
-    set(LIBNX ${LIBCTRU_INCLUDE_DIR}/..)
+    set(LIBNX ${LIBNX_INCLUDE_DIR}/..)
 
     add_library(switch::libnx STATIC IMPORTED GLOBAL)
     set_target_properties(switch::libnx PROPERTIES
         IMPORTED_LOCATION "${LIBNX_LIBRARY}"
         INTERFACE_INCLUDE_DIRECTORIES "${LIBNX_INCLUDE_DIR}"
     )
-	
-
 endif()
